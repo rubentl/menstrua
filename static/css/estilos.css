@@ -1,0 +1,13 @@
+/* CSS document */
+
+body{
+    background-color: #eee;
+}
+
+.titulo{
+    font-size: 3em;
+}
+
+.subtitulo{
+    font-size: 2em;
+}
