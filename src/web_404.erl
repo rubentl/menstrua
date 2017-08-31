@@ -11,7 +11,7 @@ title() -> "Error: Ooops, página no encontrada".
 
 body() -> 
     [#h1{text="Lo siento, hubo algún error.", class="titulo center-align"},
-     #h2{text="Por favor, regresa atrás", class="subtitulo center-align"},
+     #h2{text="Por favor, vuelve al inicio", class="subtitulo center-align"},
      #panel{class=container, body=[
         #panel{class=row, body=[
             #panel{class="col s2 offset-s5", body=[

@@ -1,26 +1,31 @@
 %% -*- mode: nitrogen -*-
 %% vim: ts=4 sw=4 et
 -module (clave).
--compile(export_all).
+-export([main/0, title/0, body/0, event/1]).
 -include_lib("nitrogen_core/include/wf.hrl").
 -include("records.hrl").
 
 main() -> #template { file="./site/templates/bare.html" }.
 
-title() -> "Hello from clave.erl!".
+title() -> "No tengo una clave".
 
 body() -> 
     [
-        #panel { style="margin: 50px 100px;", body=[
-            #span { text="Hello from clave.erl!" },
-
-            #p{},
-            #button { text="Click me!", postback=click },
-
-            #p{},
-            #panel { id=placeholder }
-        ]}
+    #panel{class="container", body=[
+        #h1{class="titulo center-align", text="No tengo una clave"},
+        #panel{class="card-panel", body=[
+            #p{class="center-align", text="Si quieres tener acceso a la aplicación necesitarás una clave."},
+            #p{class="center-align", body=["Para ello deberás ponerte en contacto conmigo en: ",                                      
+                #link{text="polipo86@gmail.com", url="mailto:polipo86@gmail.com"}]},
+            #panel{class="row", body=[
+                #panel{class="col s2 offset-s5", body=[
+                    #button{class="btn waves-effect waves-light center", text="Volver",
+                            postback=volver}]
+                }]
+            }]
+        }]
+    }
     ].
-	
-event(click) ->
-    wf:insert_top(placeholder, "<p>You clicked the button!").
+
+event(volver) ->
+    wf:redirect("/").

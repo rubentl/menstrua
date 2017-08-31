@@ -44,9 +44,5 @@ event(entrar) ->
     end.
 
 archivo(mal) ->
-    [
-
-     #p{text="Inténtalo de nuevo", class="center-align red-text text-darken-1"}
-    
-    ].
+    #p{text="Inténtalo de nuevo", class="center-align red-text text-darken-1"}.
 
