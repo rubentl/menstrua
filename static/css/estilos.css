@@ -1,13 +1,79 @@
 /* CSS document */
+/***** CSS RESET *****/
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outline:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 body{
-    background-color: #eee;
+    background-color: #ccc;
+    font-family: sans-serif;
 }
 
 .titulo{
     font-size: 3em;
+    margin: 40px auto;
+    text-shadow: 3px 3px white;
 }
 
 .subtitulo{
     font-size: 2em;
+}
+
+.center-align{
+    text-align: center;
+    margin: 20px auto;
+}
+
+.main, .botones a, .upload-button{
+    box-shadow: 2px 2px 5px 1px black;
+}
+
+.main{
+    width: 50%;
+    margin: 50px auto;
+    background-color: white;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.botones{
+    margin: 40px auto;
+}
+
+input.password{
+    border: none;
+    border-bottom: 2px solid blue;
+    width: 40%;
+    margin-top:40px;
+}
+
+input.password:focus{
+    border: none;
+    border-bottom: 2px solid green;
+}
+
+.botones a, .upload-button {
+    text-decoration: none;
+    color: white;
+    background-color: #3379ea;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.botones a.izdo{
+    margin-right: 50px;
+}
+
+.upload-content{
+    margin: 0 auto;
+    overflow: visible;
+}
+
+input.upload-button{
+    border: none;
+    font-size: large;
+}
+
+.upload_droplist{
+    width:50%;
+    text-align:center;
+    margin: 40px auto;
 }

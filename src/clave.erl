@@ -11,20 +11,19 @@ title() -> "No tengo una clave".
 
 body() -> 
     [
-    #panel{class="container", body=[
-        #h1{class="titulo center-align", text="No tengo una clave"},
-        #panel{class="card-panel", body=[
-            #p{class="center-align", text="Si quieres tener acceso a la aplicación necesitarás una clave."},
+        #h1{text="No tengo una clave", class="titulo center-align"},
+        #flash{},
+        #panel{class="main", body=[
+            #p{class="center-align", text="Si quieres tener acceso a la aplicación
+               necesitarás una clave."
+            },
             #p{class="center-align", body=["Para ello deberás ponerte en contacto conmigo en: ",                                      
-                #link{text="polipo86@gmail.com", url="mailto:polipo86@gmail.com"}]},
-            #panel{class="row", body=[
-                #panel{class="col s2 offset-s5", body=[
-                    #button{class="btn waves-effect waves-light center", text="Volver",
-                            postback=volver}]
-                }]
-            }]
-        }]
-    }
+                #link{text="polipo86@gmail.com", url="mailto:polipo86@gmail.com"}
+            ]},
+            #panel{class="botones center-align", body=[
+                #link{text="Volver", postback=volver}
+            ]}
+        ]}
     ].
 
 event(volver) ->
