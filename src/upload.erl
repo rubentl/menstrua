@@ -7,10 +7,10 @@
 -include("records.hrl").
 
 main() -> 
-    case wf:user() of 
-        auth -> #template { file="./site/templates/bare.html" };
-        undefined -> wf:redirect("/")
-    end.
+    secure(wf:user()).
+
+secure(auth) -> #template { file="./site/templates/bare.html" };
+secure(undefined) -> wf:redirect("/").
 
 title() -> "Carga el archivo con las fechas".
 

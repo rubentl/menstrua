@@ -4,7 +4,9 @@
 -include_lib("nitrogen_core/include/wf.hrl").
 -include("records.hrl").
 
-main() -> #template { file="./site/templates/bare.html" }.
+main() -> 
+    wf:clear_user(),
+    #template { file="./site/templates/bare.html" }.
 
 title() -> "Generador de calendario menstrual".
 
@@ -16,6 +18,7 @@ body() ->
     ].
 
 login() ->
+    wf:wire(login, #appear { speed=500 }),
     wf:wire(validar, password, #validate { validators=[
         #is_required { text="No puede quedar vacía la clave" },
         #custom {text="Inténtalo de nuevo.", tag=pass, function=fun passCorrecto/2 }
@@ -43,5 +46,6 @@ event(continuar) ->
 event(_) -> ok.
 
 passCorrecto(_Tag, Valor) ->
-    Valor == ?CLAVE.
+    wf:console_log(?CLAVE),
+    crypto:hash(sha, Valor) == ?CLAVE.
 

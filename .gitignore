@@ -1,0 +1,5 @@
+_build/*
+calendario.html
+tables.html
+.prototypes/
+.rebar/

@@ -5,5 +5,5 @@
               {applications,[kernel,stdlib]},
               {mod,{nitrogen_app,[]}},
               {env,[]},
-              {modules,[index,mobile,nitrogen_app,nitrogen_main_handler,
-                        nitrogen_sup]}]}.
+              {modules,[cal,clave,descarga,index,nitrogen_app,
+                        nitrogen_main_handler,nitrogen_sup,upload,web_404]}]}.

@@ -7,4 +7,8 @@
 -define (ORIGINAL, "datos.txt").
 %% Nombre del archivo para descargar con el calendario
 -define (NUEVO, "calendario.pdf").
--define (CLAVE, "puy"). %% Cambiar en producción
+%% Clave de acceso al programa
+-define (CLAVE, <<214,105,29,52,104,226,246,106,49,145,158,64,173,2,87,86,210,60,238,117>>). 
+
+-record(fecha, {year,month,day}).
+-record(calen, {id, fecha=#fecha{}, nota}).
