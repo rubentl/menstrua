@@ -26,6 +26,11 @@ body{
     box-shadow: 2px 2px 5px 1px black;
 }
 
+.botones a:active,
+.upload-button:active{
+    box-shadow: none;
+}
+
 .main{
     width: 50%;
     margin: 50px auto;

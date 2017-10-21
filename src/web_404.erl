@@ -12,14 +12,11 @@ title() -> "Error: Ooops, página no encontrada".
 body() -> 
     [#h1{text="Lo siento, hubo algún error.", class="titulo center-align"},
      #h2{text="Por favor, vuelve al inicio", class="subtitulo center-align"},
-     #panel{class=container, body=[
-        #panel{class=row, body=[
-            #panel{class="col s2 offset-s5", body=[
-                #button{id=volver, class="center waves-effect waves-light btn-large",
-                        text="Volver", postback=home}]
-            }]
-        }]
-     }
+     #panel{class="main", body=[
+        #panel{class="botones center-align", body=[
+            #link{text="Volver", postback=home}
+            ]}
+        ]}
     ].
 	
 event(home) ->
