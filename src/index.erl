@@ -18,7 +18,7 @@ body() ->
     ].
 
 login() ->
-    wf:wire(login, #appear { speed=500 }),
+    wf:wire(login, #slide_down { speed=800 }),
     wf:wire(validar, password, #validate { validators=[
         #is_required { text="No puede quedar vacía la clave" },
         #custom {text="Inténtalo de nuevo.", tag=pass, function=fun passCorrecto/2 }
