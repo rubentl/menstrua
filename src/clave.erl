@@ -9,6 +9,9 @@ main() -> #template { file="./site/templates/bare.html" }.
 
 title() -> "No tengo una clave".
 
+%% Información del modo implementado para la obtención de una clave que de acceso
+%% a la aplicación
+%%
 body() -> 
     [
         #h1{text="No tengo una clave", class="titulo center-align"},
@@ -26,5 +29,7 @@ body() ->
         ]}
     ].
 
+%% La única opción posible es volver a la página de inico
+%%
 event(volver) ->
     wf:redirect("/").

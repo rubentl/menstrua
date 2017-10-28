@@ -9,6 +9,8 @@
 main() -> 
     secure(wf:user()).
 
+%% Sólo si el usuario está registrado
+%%
 secure(auth) -> #template { file="./site/templates/bare.html" };
 secure(undefined) -> wf:redirect("/").
 
@@ -46,10 +48,14 @@ finish_upload_event(_Tag, undefined, _, _) ->
     wf:flash("Por favor selecciona un archivo"),
     ok;
 
+%% Renombro el archivo de subida y voy a procesarlo en descarga
+%%
 finish_upload_event(_Tag, _FileName, LocalFileName, _Node) ->
     ok = file:rename(LocalFileName, archivo()),
     wf:redirect("/descarga").
 
+%% ruta y nombre del archivo a procesar
+%%
 archivo() ->
     Dir = simple_bridge_util:get_env('scratch_dir'),
     filename:join([Dir, ?ORIGINAL]).

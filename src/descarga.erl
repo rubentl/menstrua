@@ -5,18 +5,17 @@
 -include_lib("nitrogen_core/include/wf.hrl").
 -include("records.hrl").
 
+
 main() ->
     body(wf:user()).
 
 body(auth) ->
     wf:content_type("application/pdf"),
     wf:download_as(?NUEVO),
-    wf:continue(new, fun() -> wf:redirect("/") end, 3000),
     elPdf();
 
 body(undefined) -> 
     wf:redirect("/").
-
 
 
 elPdf()->
@@ -26,7 +25,8 @@ elPdf()->
     Fechas = leer_archivo(Archivo),
     % Base de datos ETS con las Fechas 
     Dbase = crear_dbase(Fechas),
-    elpdf:prueba(Dbase).
+    % obtención del archivo pdf en base a la tabla ets Dbase
+    elpdf:go(Dbase).
 
 
 %% =================================================
@@ -48,6 +48,10 @@ crear_dbase(Fechas) ->
     ets:insert(Dbase,Fechas),
     cal:ets_to_pdf(Dbase).
 
+%% @doc Con el nombre del archivo subido al servidor
+%% devolvemos una lista de tuplas para ser usadas 
+%% en la creación de la tabla ets
+-spec leer_archivo(Archivo::list()) -> [tuple()].
 leer_archivo(Archivo) ->
     {ok, Datos} = file:read_file(Archivo),
     file:delete(Archivo),

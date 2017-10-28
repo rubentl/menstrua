@@ -2,6 +2,7 @@
 %% vim: ts=4 sw=4 et
 -module (web_404).
 -export([main/0, title/0, body/0, event/1]).
+
 -include_lib("nitrogen_core/include/wf.hrl").
 -include("records.hrl").
 
