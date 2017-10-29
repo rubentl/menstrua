@@ -15,8 +15,10 @@ body(auth) ->
     elPdf();
 
 body(undefined) -> 
-    wf:redirect("/").
-
+    wf:content_type("application/pdf"),
+    wf:download_as(?NUEVO),
+    {Anno, _} = string:to_integer(wf:q(ano)),
+    simple(Anno).
 
 elPdf()->
     % Nombre del archivo con el calendario subido
@@ -33,6 +35,13 @@ elPdf()->
 %% ====== API INTERNO ==============================
 %% =================================================
 
+%% @doc devuelve el calendario en pdf de un sólo año.
+%%
+-spec simple(Anno :: string()) -> binary().
+simple(Anno) ->
+    Dbase = ets:new(dbase, [ordered_set, {keypos, #calen.id}]),
+    ets:insert(Dbase, cal:year_to_ets(Anno)),
+    elpdf:go(Dbase, no_leyend).
 
 %% @doc A partir de la lista de tuplas obtenidas con el procesamiento
 %% del archivo proporcionado por el usuario se crea la base de datos 

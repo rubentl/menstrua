@@ -27,13 +27,20 @@ login() ->
         #panel{id=login, class="main", body=[
             #panel{id=formulario, class="formulario center-align", body=[
                 #h2{text="Identifícate", class="subtitulo center-align"},
-                #password{id=password, placeholder="Introduce la clave"}
+                #textbox{id=password, placeholder="Introduce la clave"}
             ]},
             #panel{class="botones center-align", body=[
                 #link{id=validar, text="Entrar", class="izdo", postback=continuar},
                 #link{text="No tengo clave", class="dcho", url="/clave"}
+            ]},
+            #panel{class="botones center-align", body=[
+                #h5{text="Sólo quiero un calendario anual, gracias.",
+                    class="center-align"},
+                #textbox{id=anno, placeholder="Año", class="izdo"},
+                #link{text="Calendario", class="dcho", postback=calendario}
             ]}
         ]}
+
     ].
 	
 event_invalid(continue) ->
@@ -42,7 +49,9 @@ event_invalid(continue) ->
 event(continuar) ->
     wf:user(auth),
     wf:redirect("/upload");
-
+event(calendario) ->
+    Anno = wf:q(anno),
+    wf:redirect(lists:join("=",["/descarga?ano",Anno]));
 event(_) -> ok.
 
 passCorrecto(_Tag, Valor) ->

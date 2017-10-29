@@ -1,6 +1,6 @@
 -module(elpdf).
 
--export([go/1]).
+-export([go/1, go/2]).
 
 -include_lib("stdlib/include/ms_transform.hrl").
 -include("records.hrl").
@@ -20,7 +20,9 @@ dia_nombre() -> ["L","M","X","J","V","S","D"].
 mes_nombre() -> ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto",
     "Septiembre","Octubre","Noviembre","Diciembre"].
 
-go(Dbase) ->
+go(Dbase) -> 
+    go(Dbase, leyend).
+go(Dbase, Leyend) ->
     PDF = eg_pdf:new(),
     eg_pdf:set_author(PDF,"Rubén Toca Lucio"),
     eg_pdf:set_title(PDF, "Calendario menstrual"),
@@ -30,7 +32,7 @@ go(Dbase) ->
     %% eg_pdf:set_date(PDF,Y,M,D),
     
     Annos = dbase_to_annos(Dbase),
-    anno(PDF, Dbase, Annos),
+    anno(PDF, Dbase, Annos, Leyend),
     
     {Serialised, _PageNo} = eg_pdf:export(PDF),
     eg_pdf:delete(PDF),
@@ -48,20 +50,23 @@ dbase_to_annos(Dbase) ->
 
 %% @doc imprime un año por hoja a4
 %%
--spec anno(PDF, Dbase, Annos) -> ok when
+-spec anno(PDF, Dbase, Annos, Leyend) -> ok when
       PDF :: pid(),
       Dbase :: ets:tid(),
-      Annos :: [calendar:year()].
-anno(_PDF, _Dbase, []) -> ok;
-anno(PDF, Dbase, [Anno|T]) ->
+      Annos :: [calendar:year()],
+      Leyend :: atom().
+anno(_PDF, _Dbase, [], _Leyend) -> ok;
+anno(PDF, Dbase, [Anno|T], Leyend) ->
     titulo(PDF,Anno),
-    leyendas(PDF),
+    case Leyend of
+        leyend ->  leyendas(PDF);
+        _ -> false end,
     Fun_foreach = fun(Mes) -> 
                     mes_tabla(PDF, Dbase, Anno, Mes)
                  end,
     lists:foreach(Fun_foreach, lists:seq(1,12)),
     eg_pdf:new_page(PDF),
-    anno(PDF, Dbase, T).
+    anno(PDF, Dbase, T, Leyend).
 
 %% @doc titulo dibuja un titulo en el centro de la línea a 50 
 %% de la parte superior de la página
